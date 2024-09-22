@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../Context/AuthContext';
+const backendUrl = "https://ainaz-backend.vercel.app/" || "http://localhost:5001"
+
 
 export default function SignUp() {
   const [name, setName] = useState('');
@@ -24,7 +26,7 @@ export default function SignUp() {
     setError(null);
 
     try {
-      const response = await fetch('http://localhost:5001/api/register', {
+      const response = await fetch(`${backendUrl}/api/cart`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

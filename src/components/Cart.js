@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+const backendUrl = "https://ainaz-backend.vercel.app/" || "http://localhost:5001"
 
 export default function Cart() {
   const [cartItems, setCartItems] = useState([]);
@@ -7,7 +8,7 @@ export default function Cart() {
   useEffect(() => {
     const fetchCartItems = async () => {
       try {
-        const response = await fetch("http://localhost:5001/api/cart"); // Replace with your API URL
+        const response = await fetch(`${backendUrl}/api/cart`); // Replace with your API URL
         if (response.ok) {
           const data = await response.json();
           setCartItems(data); // Assuming your API returns an array of cart items

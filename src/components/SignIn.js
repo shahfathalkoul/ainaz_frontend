@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../Context/AuthContext';
+const backendUrl = "https://ainaz-backend.vercel.app/" || "http://localhost:5001"
+
 export default function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -8,11 +10,12 @@ export default function SignIn() {
   const {loginState, setLoginState} = useAuth()
   const navigate = useNavigate();
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:5001/api/login', {
+      const response = await fetch(`${backendUrl}/api/cart`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

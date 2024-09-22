@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+const backendUrl = "https://ainaz-backend.vercel.app/" || "http://localhost:5001"
 const ProductCard = ({ product }) => {
   const [isAdding, setIsAdding] = useState(false);
 
@@ -12,7 +12,7 @@ const ProductCard = ({ product }) => {
             quantity: 1,
             price: parseFloat(product.price.replace('$', '')).toFixed(2)
         };
-      const response = await fetch("http://localhost:5001/api/cart", {
+      const response = await fetch(`${backendUrl}/api/cart`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json", // Set the content type to JSON
