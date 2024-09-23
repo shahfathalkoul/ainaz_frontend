@@ -46,11 +46,11 @@ const Navbar = () => {
                             {/* Sign In
                         </button> */}
                     {/* </div> */}
-                    <button className="bg-black hover:bg-red-500 text-white  py-2 px-4 rounded flex items-center">
+                    {/* <button className="bg-black hover:bg-red-500 text-white  py-2 px-4 rounded flex items-center"> */}
                     {/* {if doesnt work paste svg} */}
 
-                        Wishlist
-                    </button>
+                        {/* Wishlist
+                    </button> */}
                     <button onClick={handlecart} className="bg-black hover:bg-red-500 text-white  py-2 px-4 rounded flex items-center">
                     
                 {/* {if doesnt work paste svg} */}
@@ -82,13 +82,17 @@ const Navbar = () => {
                 <div className="md:hidden">
                     <div className="flex flex-col space-y-2">
                         
-                        <button className="block w-full text-left px-4 py-2  bg-black  text-white font-bold rounded">
+                    {!loginState ?  <button onClick={handleit} className="block w-full text-left px-4 py-2  bg-black  text-white font-bold rounded">
                         Sign In
                         </button>
-                        <button className="block w-full text-left px-4 py-2 bg-black  text-white font-bold rounded">
+                        :
+                        <button  onClick={handleLogout} className="block w-full text-left px-4 py-2  bg-black  text-white font-bold rounded">
+                        Sign Out
+                        </button>}
+                        {/* <button className="block w-full text-left px-4 py-2 bg-black  text-white font-bold rounded">
                             Wishlist
-                        </button>
-                        <button className="block w-full text-left px-4 py-2 bg-black  text-white font-bold rounded">
+                        </button> */}
+                        <button onClick={handlecart}  className="block w-full text-left px-4 py-2 bg-black  text-white font-bold rounded">
                             Cart
                         </button>
                     </div>
