@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-const backendUrl = "https://ainaz-backend.vercel.app/" || "http://localhost:5001"
+const backendUrl = "https://ainaz-backend.vercel.app" || "http://localhost:5001"
 
 export default function Cart() {
   const [cartItems, setCartItems] = useState([]);

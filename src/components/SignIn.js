@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../Context/AuthContext';
-const backendUrl = "https://ainaz-backend.vercel.app/" || "http://localhost:5001"
+const backendUrl = "https://ainaz-backend.vercel.app" || "http://localhost:5001"
 
 export default function SignIn() {
   const [email, setEmail] = useState('');
@@ -15,7 +15,7 @@ export default function SignIn() {
     e.preventDefault();
 
     try {
-      const response = await fetch(`${backendUrl}/api/cart`, {
+      const response = await fetch(`${backendUrl}/api/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -1,5 +1,5 @@
 import { useState } from "react";
-const backendUrl = "https://ainaz-backend.vercel.app/" || "http://localhost:5001"
+const backendUrl = "https://ainaz-backend.vercel.app" || "http://localhost:5001"
 const ProductCard = ({ product }) => {
   const [isAdding, setIsAdding] = useState(false);
 
