@@ -57,9 +57,9 @@ const ProductCard = ({ product }) => {
       >
         {isAdding ? "Adding..." : "Add to Cart"}
       </button>
-      <button className="bg-black text-white px-4 py-2  rounded hover:bg-red-500 transition">
+      {/* <button className="bg-black text-white px-4 py-2  rounded hover:bg-red-500 transition">
         Wishlist
-      </button>
+      </button> */}
     </div>
   );
 };
