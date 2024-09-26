@@ -1,9 +1,22 @@
 import { useState } from "react";
+import { useAuth } from '../Context/AuthContext';
+import { useNavigate } from'react-router-dom';
 const backendUrl = "https://ainaz-backend.vercel.app" || "http://localhost:5001"
+
+
+
+
 const ProductCard = ({ product }) => {
   const [isAdding, setIsAdding] = useState(false);
+  const {loginState, setLoginState} = useAuth()
+  const navigate = useNavigate();
 
   const handelCart = async (product) => {
+    if (!loginState){
+        alert("You are not logged in! Please log in to add products to your cart.")
+        navigate("/SignUp")
+        return
+    }
     setIsAdding(true);
     
     try {

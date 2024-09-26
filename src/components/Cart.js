@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from "react";
-const backendUrl = "https://ainaz-backend.vercel.app" || "http://localhost:5001"
+import { useNavigate } from "react-router-dom";  // Import useNavigate hook
+const backendUrl = "https://ainaz-backend.vercel.app" || "http://localhost:5001";
 
 export default function Cart() {
   const [cartItems, setCartItems] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();  // Initialize useNavigate
 
   // Fetch cart items from the backend
   useEffect(() => {
     const fetchCartItems = async () => {
       try {
-        const response = await fetch(`${backendUrl}/api/cart`); // Replace with your API URL
+        const response = await fetch(`${backendUrl}/api/cart`);
         if (response.ok) {
           const data = await response.json();
-          setCartItems(data); // Assuming your API returns an array of cart items
+          setCartItems(data);
         } else {
           console.error("Failed to fetch cart items");
         }
@@ -19,10 +22,9 @@ export default function Cart() {
         console.error("Error fetching cart items:", error);
       }
     };
-
     fetchCartItems();
   }, []);
-  console.log(cartItems)
+
   const handleQuantity = (id, action) => {
     setCartItems((prevItems) =>
       prevItems.map((item) =>
@@ -50,6 +52,10 @@ export default function Cart() {
       (acc, item) => acc + item.price * item.quantity,
       0
     );
+  };
+
+  const handleCheckout = () => {
+    navigate('/checkout')
   };
 
   return (
@@ -117,7 +123,11 @@ export default function Cart() {
             <span>Total</span>
             <span>${(calculateTotal() + 10).toFixed(2)}</span>
           </div>
-          <button className="w-full bg-blue-500 text-white py-2 rounded-lg mt-4 hover:bg-blue-600">
+          <button
+            className="w-full bg-blue-500 text-white py-2 rounded-lg mt-4 hover:bg-blue-600"
+            onClick={handleCheckout}
+            disabled={loading}
+          >
             Checkout
           </button>
         </div>

@@ -4,6 +4,7 @@ import SignUp from "./components/SignUp";
 import { Home } from "./components/Home";
 import Cart from "./components/Cart";
 import SignIn from "./components/SignIn";
+import CheckoutPage from "./components/CheckoutPage";
 export default function MyApp({ Component, pageProps }) {
   const appRouter = createBrowserRouter([
     {
@@ -22,6 +23,11 @@ export default function MyApp({ Component, pageProps }) {
     path : "/SignIn",
     element : <SignIn/>
 },
+{
+  path : "/checkout",
+  element : <CheckoutPage/>
+},
+
 
 ])
 
