@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAuth } from '../Context/AuthContext';
 import { useNavigate } from'react-router-dom';
-const backendUrl = "https://ainaz-backend.vercel.app" || "http://localhost:5001"
+const backendUrl = "https://ainaz-backend.onrender.com" || "http://localhost:5001"
 // const backendUrl = "http://localhost:5001"
 
 
