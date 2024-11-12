@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";  // Import useNavigate hook
+
+
 const backendUrl = "https://ainaz-backend.vercel.app" || "http://localhost:5001";
+// const backendUrl =  "http://localhost:5001";
+
 
 export default function Cart() {
   const [cartItems, setCartItems] = useState([]);
@@ -25,26 +29,61 @@ export default function Cart() {
     fetchCartItems();
   }, []);
 
-  const handleQuantity = (id, action) => {
-    setCartItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === id
-          ? {
-              ...item,
-              quantity:
-                action === "increment"
-                  ? item.quantity + 1
-                  : item.quantity > 1
-                  ? item.quantity - 1
-                  : 1,
-            }
-          : item
-      )
-    );
+  const handleQuantity = async (id, action) => {
+    try {
+      // Send request to backend to update the quantity
+      const response = await fetch(`${backendUrl}/api/cart/update-quantity`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id, action }),
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Quantity updated:', data); // Optional: check the response
+  
+        // Update cart items locally if the backend request is successful
+        setCartItems((prevItems) =>
+          prevItems.map((item) =>
+            item.id === id
+              ? {
+                  ...item,
+                  quantity:
+                    action === 'increment'
+                      ? item.quantity + 1
+                      : item.quantity > 1
+                      ? item.quantity - 1
+                      : 1,
+                }
+              : item
+          )
+        );
+      } else {
+        console.error('Failed to update quantity');
+      }
+    } catch (error) {
+      console.error('Error during quantity update:', error);
+    }
   };
 
-  const handleRemove = (id) => {
-    setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
+
+
+  const handleRemove = async (id) => {
+    try {
+      const response = await fetch(`${backendUrl}/api/cart/${id}`, {
+        method: 'DELETE',
+      });
+  
+      if (response.ok) {
+        setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
+      } else {
+        console.error('Failed to remove item from cart');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   const calculateTotal = () => {
@@ -54,8 +93,23 @@ export default function Cart() {
     );
   };
 
-  const handleCheckout = () => {
-    navigate('/checkout')
+  const handleCheckout = async () => {
+    try {
+      const response = await fetch(`${backendUrl}/api/checkout`, {
+        method: 'POST',
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Checkout data:', data); // Optional: check the returned data
+        setCartItems([]); // Clear the cart on the frontend
+        navigate('/checkout'); // Navigate to the checkout page
+      } else {
+        console.error('Failed to complete checkout');
+      }
+    } catch (error) {
+      console.error('Error during checkout:', error);
+    }
   };
 
   return (
@@ -135,3 +189,4 @@ export default function Cart() {
     </div>
   );
 }
+

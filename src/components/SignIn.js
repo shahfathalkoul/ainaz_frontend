@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../Context/AuthContext';
-const backendUrl = "https://ainaz-backend.vercel.app" || "http://localhost:5001"
+// const backendUrl = "https://ainaz-backend.vercel.app" || "http://localhost:5001"
+const backendUrl = "http://localhost:5001"
+
 
 export default function SignIn() {
   const [email, setEmail] = useState('');
